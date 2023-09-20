@@ -1,0 +1,47 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Settings";
+}
+<div class="container">
+    <!-- Display the succes message -->
+    @if ((bool)ViewData["Succes"]!)
+    {
+        <div class="alert alert-success" role="alert">
+            Succesvol opgeslagen!
+        </div>
+    }
+    <form method="post">
+        <div class="row p-1">
+            <div class="col-3">Tijd tussen locatie tonen (in minuten).</div>
+            <div class="col-1">
+                <input type="number" id="locShown" value="5" asp-for="Settings!.TimeBetween" />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-3">Stel speeltijd in, deze timer start nadat op start gedrukt wordt (in minuten).</div>
+            <div class="col-5">
+                <input type="number" id="messageInput" value="60" asp-for="Settings!.GameTime" />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-3">Kies het aantal <b>jagers</b> in het spel.</div>
+            <div class="col-5">
+                <input type="number" id="messageInput" value="2" asp-for="Settings!.HunterAmount" />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-3">Kies het aantal <b>lopers</b> in het spel.</div>
+            <div class="col-5">
+                <input type="number" id="messageInput" value="1" asp-for="Settings!.RunnerAmount" />
+            </div>
+        </div>
+        <div class="row p-1">
+            <div class="col-5 text-end">
+                <input type="submit" id="sendButton" value="Save & Start timer" class="button rounded-3" />
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/site.js"></script>

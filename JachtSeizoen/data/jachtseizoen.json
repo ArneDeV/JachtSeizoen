@@ -1,0 +1,49 @@
+{
+    "players": {
+      "jager": [
+        {
+          "name": "jager1",
+          "lastLocTime": 0,
+          "longitude": 0,
+          "latitude": 0,
+          "enabled": true
+        },
+        {
+          "name": "jager2",
+          "lastLocTime": 0,
+          "longitude": 0,
+          "latitude": 0,
+          "enabled": true
+        },
+        {
+          "name": "jager3",
+          "lastLocTime": 0,
+          "longitude": 0,
+          "latitude": 0,
+          "enabled": false
+        }
+      ],
+      "loper": [
+        {
+          "name": "loper1",
+          "lastLocTime": 0,
+          "longitude": 0,
+          "latitude": 0,
+          "enabled": true
+        },
+        {
+          "name": "loper2",
+          "lastLocTime": 0,
+          "longitude": 0,
+          "latitude": 0,
+          "enabled": false
+        }
+      ]
+    },
+    "settings": {
+      "TimeBetween": 300,
+      "GameTime": 3600,
+      "Jagers": 2,
+      "Lopers": 1
+    }
+  }
