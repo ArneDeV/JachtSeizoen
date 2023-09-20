@@ -13,31 +13,35 @@
     }
     <form method="post">
         <div class="row p-1">
-            <div class="col-3">Tijd tussen locatie tonen (in minuten).</div>
-            <div class="col-1">
+            <div class="col-6">Tijd tussen locatie tonen (in minuten).</div>
+            <div class="col-6">
                 <input type="number" id="locShown" value="5" asp-for="Settings!.TimeBetween" />
             </div>
+            <span asp-validation-for="Settings!.TimeBetween" class="text-danger"></span>
         </div>
         <div class="row p-1">
-            <div class="col-3">Stel speeltijd in, deze timer start nadat op start gedrukt wordt (in minuten).</div>
-            <div class="col-5">
+            <div class="col-6">Stel speeltijd in, deze timer start nadat op start gedrukt wordt (in minuten).</div>
+            <div class="col-6">
                 <input type="number" id="messageInput" value="60" asp-for="Settings!.GameTime" />
             </div>
+            <span asp-validation-for="Settings!.GameTime" class="text-danger"></span>
         </div>
         <div class="row p-1">
-            <div class="col-3">Kies het aantal <b>jagers</b> in het spel.</div>
-            <div class="col-5">
+            <div class="col-6">Kies het aantal <b>jagers</b> in het spel.</div>
+            <div class="col-6">
                 <input type="number" id="messageInput" value="2" asp-for="Settings!.HunterAmount" />
             </div>
+            <span asp-validation-for="Settings!.HunterAmount" class="text-danger"></span>
         </div>
         <div class="row p-1">
-            <div class="col-3">Kies het aantal <b>lopers</b> in het spel.</div>
-            <div class="col-5">
+            <div class="col-6">Kies het aantal <b>lopers</b> in het spel.</div>
+            <div class="col-6">
                 <input type="number" id="messageInput" value="1" asp-for="Settings!.RunnerAmount" />
             </div>
+            <span asp-validation-for="Settings!.RunnerAmount" class="text-danger"></span>
         </div>
         <div class="row p-1">
-            <div class="col-5 text-end">
+            <div class="col-8 text-end">
                 <input type="submit" id="sendButton" value="Save & Start timer" class="button rounded-3" />
             </div>
         </div>
