@@ -45,12 +45,12 @@ namespace JachtSeizoen.Services
             Console.WriteLine("Placeholder for changing location");
         }
 
-        public void UpdateSettings(int timeBetw, int gameTime, int hunterAmount, int runnerAmount)
+        // Write new settings to the settings file
+        public void UpdateSettings(Settings? newSettings)
         {
-            // Create settings object
-            Settings? settings = new Settings { GameTime = gameTime, TimeBetween = timeBetw, HunterAmount = hunterAmount, RunnerAmount = runnerAmount };
-
-            // Write new settings to the settings file
+            // First clear settings
+            File.Create(JsonSettings).Close();
+            // Add the new settings
             using var outputStream = File.OpenWrite(JsonSettings);
             JsonSerializer.Serialize<Settings>(
                 new Utf8JsonWriter(outputStream, new JsonWriterOptions
@@ -58,7 +58,7 @@ namespace JachtSeizoen.Services
                     SkipValidation = true,
                     Indented = true
                 }),
-                settings
+                newSettings!
             );
         }
     }

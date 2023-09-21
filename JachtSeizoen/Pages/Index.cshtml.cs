@@ -1,4 +1,5 @@
 ﻿using JachtSeizoen.Models;
+using JachtSeizoen.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -6,6 +7,15 @@ namespace JachtSeizoen.Pages
 {
     public class IndexModel : PageModel
     {
+        public IndexModel(JsonFileService jsonFileService)
+        {
+            SettingsService = jsonFileService;
+            Settings = SettingsService.GetSettings();
+        }
+
+        // File service for changing settings
+        public JsonFileService SettingsService { get; }
+
         public IActionResult OnGet()
         {
             // Make sure that succes message is off by default
@@ -25,10 +35,9 @@ namespace JachtSeizoen.Pages
                 ViewData["Succes"] = false;
                 return Page();
             }
-            // TODO: Set new settings in the JSON
-
-            // In case of good settings set succes message
+            // Set succes message & update setttings
             ViewData["Succes"] = true;
+            SettingsService.UpdateSettings(Settings);
             return Page();
         }
     }
