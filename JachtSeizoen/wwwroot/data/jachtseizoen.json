@@ -1,6 +1,5 @@
 {
-    "players": {
-      "jager": [
+    "players": [
         {
           "name": "jager1",
           "lastLocTime": 0,
@@ -21,9 +20,7 @@
           "longitude": 0,
           "latitude": 0,
           "enabled": false
-        }
-      ],
-      "loper": [
+        },
         {
           "name": "loper1",
           "lastLocTime": 0,
@@ -38,8 +35,7 @@
           "latitude": 0,
           "enabled": false
         }
-      ]
-    },
+      ],
     "settings": {
       "TimeBetween": 300,
       "GameTime": 3600,

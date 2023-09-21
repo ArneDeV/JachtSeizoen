@@ -1,9 +1,12 @@
 using JachtSeizoen.Hubs;
+using JachtSeizoen.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
+builder.Services.AddSingleton<JsonFileService>();
 
 var app = builder.Build();
 
