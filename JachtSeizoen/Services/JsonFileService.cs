@@ -19,28 +19,25 @@ namespace JachtSeizoen.Services
         // Get the players --> used in change Loc
         public IEnumerable<Player>? GetPlayers()
         {
-            using (var jsonFileReader = File.OpenText(JsonPlayers))
-            {
-                return JsonSerializer.Deserialize<Player[]>(jsonFileReader.ReadToEnd(),
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-            }
+            using var jsonFileReader = File.OpenText(JsonPlayers);
+            return JsonSerializer.Deserialize<Player[]>(jsonFileReader.ReadToEnd(),
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
         }
 
         public Settings? GetSettings()
         {
-            using (var jsonFileReader = File.OpenText(JsonSettings))
-            {
-                return JsonSerializer.Deserialize<Settings>(jsonFileReader.ReadToEnd(),
-                    new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    });
-            }
+            using var jsonFileReader = File.OpenText(JsonSettings);
+            return JsonSerializer.Deserialize<Settings>(jsonFileReader.ReadToEnd(),
+                new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
         }
 
+        // Todo Fix this function
         public void ChangeLoc(string player, double lon, double lat)
         {
             // Might also need time data
@@ -50,9 +47,19 @@ namespace JachtSeizoen.Services
 
         public void UpdateSettings(int timeBetw, int gameTime, int hunterAmount, int runnerAmount)
         {
-            // Add setting updater here
-            Console.WriteLine("Placeholder for changing the settings");
-        }
+            // Create settings object
+            Settings? settings = new Settings { GameTime = gameTime, TimeBetween = timeBetw, HunterAmount = hunterAmount, RunnerAmount = runnerAmount };
 
+            // Write new settings to the settings file
+            using var outputStream = File.OpenWrite(JsonSettings);
+            JsonSerializer.Serialize<Settings>(
+                new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                {
+                    SkipValidation = true,
+                    Indented = true
+                }),
+                settings
+            );
+        }
     }
 }
