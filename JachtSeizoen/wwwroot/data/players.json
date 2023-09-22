@@ -1,32 +1,32 @@
 [
   {
-    "name": "jager1",
-    "lastLocTime": "2018-12-10T13:45:00.000Z",
-    "longitude": 0,
-    "latitude": 0
+    "Name": "jager1",
+    "Longitude": 0,
+    "Latitude": 0,
+    "LastLocTime": "2023-09-22T18:31:31.4758655+02:00"
   },
   {
-    "name": "jager2",
-    "lastLocTime": "2018-12-10T13:45:00.000Z",
-    "longitude": 0,
-    "latitude": 0
+    "Name": "jager2",
+    "Longitude": 0,
+    "Latitude": 0,
+    "LastLocTime": "2023-09-22T18:31:31.4758665+02:00"
   },
   {
-    "name": "jager3",
-    "lastLocTime": "2018-12-10T13:45:00.000Z",
-    "longitude": 0,
-    "latitude": 0
+    "Name": "jager3",
+    "Longitude": 0,
+    "Latitude": 0,
+    "LastLocTime": "2023-09-22T18:31:31.4758667+02:00"
   },
   {
-    "name": "runner1",
-    "lastLocTime": "2018-12-10T13:45:00.000Z",
-    "longitude": 0,
-    "latitude": 0
+    "Name": "runner1",
+    "Longitude": 0,
+    "Latitude": 0,
+    "LastLocTime": "2023-09-22T18:31:31.4758668+02:00"
   },
   {
-    "name": "runner2",
-    "lastLocTime": "2018-12-10T13:45:00.000Z",
-    "longitude": 0,
-    "latitude": 0
+    "Name": "runner2",
+    "Longitude": 0,
+    "Latitude": 0,
+    "LastLocTime": "2023-09-22T18:31:31.4758669+02:00"
   }
 ]

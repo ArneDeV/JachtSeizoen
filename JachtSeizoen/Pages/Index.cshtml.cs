@@ -38,7 +38,9 @@ namespace JachtSeizoen.Pages
             // Set succes message & update setttings
             ViewData["Succes"] = true;
             Settings!.StartTime = DateTime.Now;
+            // Update the settings and start the player timers.
             SettingsService.UpdateSettings(Settings);
+
             return Page();
         }
     }

@@ -75,6 +75,27 @@ namespace JachtSeizoen.Services
                 }),
                 newSettings!
             );
+
+            // Start the player timers
+            StartTimers();
+        }
+
+        public void StartTimers()
+        {
+            IEnumerable<Player>? players = GetPlayers();
+            foreach(Player player in players!)
+            {
+                player.LastLocTime = DateTime.Now;
+            }
+            using var outputStream = File.OpenWrite(JsonPlayers);
+            JsonSerializer.Serialize<IEnumerable<Player>>(
+                new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                {
+                    SkipValidation = true,
+                    Indented = true
+                }),
+                players
+            );
         }
     }
 }
