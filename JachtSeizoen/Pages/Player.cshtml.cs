@@ -15,14 +15,14 @@ namespace JachtSeizoen.Pages
             GameSettings = jsonFileService.GetSettings();
 
             // Game Time data
-            EndTime = GameSettings!.StartTime.AddMinutes(GameSettings.GameTime);
-            RemainingGameTime = EndTime.Subtract(value: DateTime.Now);
+            DateTime endTime = GameSettings!.StartTime.AddMinutes(GameSettings.GameTime);
+            RemainingGameTime = endTime.Subtract(value: DateTime.Now);
         }
 
         private JsonFileService GameDataService { get; }
 
-        // Get EndTimes
-        private DateTime EndTime { get; }
+        // Get EndTimes --> might not be needed
+        //private DateTime EndTime { get; }
 
         public Settings? GameSettings { get; }
 
