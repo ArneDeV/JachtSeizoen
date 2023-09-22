@@ -25,6 +25,12 @@ body {
     height: 65vh;
 }
 
-#sendButton {
-    margin-top: 5px;
+.sendButton {
+    margin-top: 15px;
+}
+
+.timer {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.5rem;
 }

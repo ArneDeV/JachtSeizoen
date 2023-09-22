@@ -37,6 +37,7 @@ namespace JachtSeizoen.Pages
             }
             // Set succes message & update setttings
             ViewData["Succes"] = true;
+            Settings!.StartTime = DateTime.Now;
             SettingsService.UpdateSettings(Settings);
             return Page();
         }

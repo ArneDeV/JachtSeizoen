@@ -1,0 +1,41 @@
+﻿@page
+@model JachtSeizoen.Pages.PlayModel
+@{
+    ViewData["Title"] = "Speel";
+}
+<div class="container">
+    <p>Via onderstaande radiobox kan een bepaalde speler gekozen worden. Belangrijk hierbij is dat je een speler kies die <b>nog NIET gekozen</b> is. 
+        Bij het twee keer selecteren van dezelfde speler zal het spel niet werken zoals verwacht en dus niet correct gespeeld kunnen worden :)).</p>
+    
+    <!-- Send user to right playing page -->
+    <form method="post">
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0"><b>Selecteer speler</b></legend>
+                <div class="col-sm-10">
+                    <!-- C# code for adding jager radio boxes -->
+                    @for (int i = 0; i<Model.HunterAmount; i++)
+                    {
+                        string jagerId = $"jager{i + 1}";
+                        // HTML snippet
+                        <div class="form-check">
+                            <input class="form-check-input" asp-for="SelectedBox" type="radio" id="@jagerId" value="@jagerId">
+                            <label class="form-check-label" for="@jagerId">Jager @(i+1)</label>
+                        </div>
+                    }
+                    <!-- C# code for adding loper radio boxes -->
+                    @for (int i = 0; i < Model.RunnerAmount; i++)
+                    {
+                        string runnerId = $"runner{i + 1}";
+                        // HTML snippet
+                        <div class="form-check">
+                            <input class="form-check-input" asp-for="SelectedBox" type="radio" id="@runnerId" value="@runnerId">
+                            <label class="form-check-label" for="@runnerId">Loper @(i + 1)</label>
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary sendButton">Speel !</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>

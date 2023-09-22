@@ -1,31 +1,31 @@
 [
   {
     "name": "jager1",
-    "lastLocTime": 0,
+    "lastLocTime": "2018-12-10T13:45:00.000Z",
     "longitude": 0,
     "latitude": 0
   },
   {
     "name": "jager2",
-    "lastLocTime": 0,
+    "lastLocTime": "2018-12-10T13:45:00.000Z",
     "longitude": 0,
     "latitude": 0
   },
   {
     "name": "jager3",
-    "lastLocTime": 0,
+    "lastLocTime": "2018-12-10T13:45:00.000Z",
     "longitude": 0,
     "latitude": 0
   },
   {
-    "name": "loper1",
-    "lastLocTime": 0,
+    "name": "runner1",
+    "lastLocTime": "2018-12-10T13:45:00.000Z",
     "longitude": 0,
     "latitude": 0
   },
   {
-    "name": "loper2",
-    "lastLocTime": 0,
+    "name": "runner2",
+    "lastLocTime": "2018-12-10T13:45:00.000Z",
     "longitude": 0,
     "latitude": 0
   }
