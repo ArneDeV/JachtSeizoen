@@ -2,11 +2,6 @@
 // for details on configuring this project to bundle and minify static web assets.
 "use strict";
 
-var connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
-    .withAutomaticReconnect([0, 2000, 10000, 30000, 60000, 120000]) // delay before attempts in ms
-    .build()
-
 var pos = ""
 
 // Start connection

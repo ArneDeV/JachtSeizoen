@@ -34,3 +34,8 @@ body {
     text-align: center;
     font-size: 1.5rem;
 }
+
+#player {
+    font-size: 0.5px;
+    color: white;
+}

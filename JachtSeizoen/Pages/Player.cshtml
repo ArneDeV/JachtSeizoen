@@ -1,14 +1,22 @@
 ﻿@page
 @model JachtSeizoen.Pages.PlayerModel
+@using System.Timers;
 @{
     ViewData["Title"] = "Playing...";
 }
+
 <div class="container">
     <div id="map"></div>
     <div>
-        <p class="timer">Tijd tot delen locatie:  <b>@Model.ShownString</b></p>
-        <p class="timer">Speeltijd:  <b>@Model.GameTimeString</b></p>
+        <p class="timer">Tijd tot delen locatie:  <b id="playerTime">@Model.ShownString</b></p>
+        <p class="timer">Speeltijd:  <b id="gameTime">@Model.GameTimeString</b></p>
+        <span id="player">@Model.CurrentPlayer!.Name</span>
     </div>
 </div>
-<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/signalr/dist/browser/signalr.js" asp-append-version="true"></script>
 <script src="~/js/kaart.js"></script>
+<script type="text/javascript">
+    // Test some code
+    // SendMessage SignalR --> Function die opgeroepen wordt
+    // Receive message --> functie die ontvangen/uitgevoerd wordt client side
+</script>
