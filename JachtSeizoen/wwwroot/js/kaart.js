@@ -1,12 +1,28 @@
 ﻿// Vars used in document
-var gameTimeH = 0;
-var gameTimeM = 0;
-var gameTimeSec = 0;
-
 var playerTimeM = 0;
 var playerTimeSec = 0;
 
 var playerName = document.getElementById("player").textContent;
+
+function displayTime(timeInSec, id) {
+    let hours = Math.floor(timeInSec / 3600);
+    let minutes = Math.floor((timeInSec / 60) % 60);
+    let seconds = Math.floor((timeInSec % 60));
+    let formattedTime = id === "gameTime" ? padZero(hours) + ":" : ""
+    formattedTime += padZero(minutes) + ":" + padZero(seconds);
+    document.getElementById(id).textContent = formattedTime;
+}
+
+function padZero(num) {
+    return num.toString().padStart(2, "0");
+}
+
+function countdown() {
+    gameTimeSec--;
+    playerTimeSec--;
+    displayTime(gameTimeSec, "gameTime");
+    displayTime(playerTimeSec, "playerTime");
+}
 
 // [Coordinate], zoomlevel
 var map = L.map('map').setView([51.066729, 3.630271], 14);
@@ -57,6 +73,12 @@ connection.on("FirstStart", function (timeData) {
     console.log(timeData[1]);
     [gameTimeH, gameTimeM, gameTimeSec] = timeData[0].split(":");
     [playerTimeM, playerTimeSec] = timeData[1].split(":");
-    [gameTimeH, gameTimeM, gameTimeSec] = [parseInt(gameTimeH), parseInt(gameTimeM), parseInt(gameTimeSec)];
-    [playerTimeM, playerTimeSec] = [parseInt(playerTimeM), parseInt(playerTimeSec)];
+    gameTimeSec = parseInt(gameTimeH) * 3600 + parseInt(gameTimeM) *60 + parseInt(gameTimeSec);
+    playerTimeSec = parseInt(playerTimeM) * 60 + parseInt(playerTimeSec);
+    setInterval(countdown, 1000);
 });
+
+// TODO:
+// 1. Fix counters
+// 2. Player counter = 0 --> Send loc + get new time data
+// 3. Update map

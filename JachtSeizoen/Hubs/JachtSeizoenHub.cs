@@ -31,11 +31,17 @@ namespace JachtSeizoen.Hubs
 
         public async Task RetrieveTimeData(string playerName)
         {
+            string remainingPlayerTime = GetRevealTime(playerName);
+            string[] startTimes = { GameTimeString, remainingPlayerTime };
+            await Clients.Caller.SendAsync("FirstStart", startTimes);
+        }
+
+        private string GetRevealTime(string playerName)
+        {
             Player player = this.jsonFileService.GetPlayer(playerName);
             DateTime endTime = player.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
             TimeSpan remainingPlayerTime = endTime.Subtract(value: DateTime.Now);
-            string[] startTimes = {GameTimeString, remainingPlayerTime.ToString(@"mm\:ss")};
-            await Clients.Caller.SendAsync("FirstStart", startTimes);
+            return remainingPlayerTime.ToString(@"mm\:ss");
         }
     }
 }
