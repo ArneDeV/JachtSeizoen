@@ -3,7 +3,6 @@ using JachtSeizoen.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Timers;
 
 namespace JachtSeizoen.Pages
 {
@@ -51,6 +50,7 @@ namespace JachtSeizoen.Pages
             if (!string.IsNullOrEmpty(Handler))
             {
                 CurrentPlayer = GameDataService.GetPlayer(Handler);
+                // Change logic for NextLocTime instead
                 DateTime showTime = CurrentPlayer.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
                 NextShown = showTime.Subtract(value: DateTime.Now);
                 Console.WriteLine($"Werkt! ({Handler})");

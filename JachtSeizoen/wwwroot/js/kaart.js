@@ -3,7 +3,7 @@ var playerTimeM = 0;
 var playerTimeSec = 0;
 
 var playerName = document.getElementById("player").textContent;
-
+var pos = ""
 function displayTime(timeInSec, id) {
     let hours = Math.floor(timeInSec / 3600);
     let minutes = Math.floor((timeInSec / 60) % 60);
@@ -22,6 +22,19 @@ function countdown() {
     playerTimeSec--;
     displayTime(gameTimeSec, "gameTime");
     displayTime(playerTimeSec, "playerTime");
+    if (playerTimeSec === 0) {
+        let location = getLocation();
+        connection.invoke("RetrieveLocation", playerName, location[0], location[1]);
+    }
+}
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            return [position.coords.latitude, position.coords.longitude];
+        });
+    }
+    return [51.066729, 3.630271];
 }
 
 // [Coordinate], zoomlevel
@@ -69,8 +82,6 @@ connection.start().then(function () {
 
 // Uitvoeren als er een "FirstStart" type message komt van de server
 connection.on("FirstStart", function (timeData) {
-    console.log("Time data retrieved");
-    console.log(timeData[1]);
     [gameTimeH, gameTimeM, gameTimeSec] = timeData[0].split(":");
     [playerTimeM, playerTimeSec] = timeData[1].split(":");
     gameTimeSec = parseInt(gameTimeH) * 3600 + parseInt(gameTimeM) *60 + parseInt(gameTimeSec);
@@ -78,7 +89,12 @@ connection.on("FirstStart", function (timeData) {
     setInterval(countdown, 1000);
 });
 
+connection.on("LocationUpdate", function (timeBetween) {
+    playerTimeSec = timeBetween;
+    displayTime(playerTimeSec, "playerTime");
+})
+
 // TODO:
-// 1. Fix counters
+// 1. Fix counters DONE
 // 2. Player counter = 0 --> Send loc + get new time data
 // 3. Update map

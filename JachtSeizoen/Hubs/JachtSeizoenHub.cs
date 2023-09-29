@@ -36,8 +36,16 @@ namespace JachtSeizoen.Hubs
             await Clients.Caller.SendAsync("FirstStart", startTimes);
         }
 
+        public async Task RetrieveLocation(string playername, double lat, double lon)
+        {
+            Console.WriteLine($"{playername}: Lat={lat}, Lon={lon}");
+            jsonFileService.ChangeLoc(playername, lat, lon);
+            await Clients.All.SendAsync("LocationUpdate", GameSettings!.TimeBetween * 60);
+        }
+
         private string GetRevealTime(string playerName)
         {
+            // TODO: Change logic for Next Player time
             Player player = this.jsonFileService.GetPlayer(playerName);
             DateTime endTime = player.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
             TimeSpan remainingPlayerTime = endTime.Subtract(value: DateTime.Now);

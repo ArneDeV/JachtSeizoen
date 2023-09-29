@@ -9,7 +9,7 @@ namespace JachtSeizoen.Models
         public double Longitude { get; set; } = 0;
         public double Latitude { get; set; } = 0;
         [DataType(DataType.DateTime)]
-        public DateTime LastLocTime { get; set; }
+        public DateTime LastLocTime { get; set; } // Has to be changed to NextLocShown
         // Not needed anymore?
         //public bool Enabled { get; set; }
 

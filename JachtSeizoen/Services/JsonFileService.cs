@@ -57,7 +57,18 @@ namespace JachtSeizoen.Services
             }
             Console.WriteLine("Placeholder for changing location");
             Console.WriteLine(players!.First(x => x.Name == playerName).ToString());
-
+            // First player list
+            //File.Create(JsonSettings).Close();
+            // Add the new settings
+            using var outputStream = File.OpenWrite(JsonPlayers);
+            JsonSerializer.Serialize<IEnumerable<Player>>(
+                new Utf8JsonWriter(outputStream, new JsonWriterOptions
+                {
+                    SkipValidation = true,
+                    Indented = true
+                }),
+                players!
+            );
         }
 
         // Write new settings to the settings file
