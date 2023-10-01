@@ -1,32 +1,32 @@
 [
   {
     "Name": "jager1",
-    "Longitude": 0,
-    "Latitude": 0,
-    "LastLocTime": "2023-09-29T22:09:47.5883843+02:00"
+    "Longitude": 3.652047118922085,
+    "Latitude": 51.05532518804921,
+    "LastLocTime": "2023-10-01T16:57:28.0769048+02:00"
   },
   {
     "Name": "jager2",
-    "Longitude": 51.066729,
-    "Latitude": 3.630271,
-    "LastLocTime": "2023-09-29T22:11:54.1984491+02:00"
+    "Longitude": 3.630376,
+    "Latitude": 51.06678,
+    "LastLocTime": "2023-10-01T16:57:28.0769063+02:00"
   },
   {
     "Name": "jager3",
-    "Longitude": 0,
-    "Latitude": 0,
-    "LastLocTime": "2023-09-29T22:09:47.5883926+02:00"
+    "Longitude": 3.642407,
+    "Latitude": 51.065819,
+    "LastLocTime": "2023-10-01T16:57:28.0769065+02:00"
   },
   {
     "Name": "runner1",
-    "Longitude": 0,
-    "Latitude": 0,
-    "LastLocTime": "2023-09-29T22:09:47.5883928+02:00"
+    "Longitude": 3.652048192827041,
+    "Latitude": 51.05532426662019,
+    "LastLocTime": "2023-10-01T16:58:29.3291139+02:00"
   },
   {
     "Name": "runner2",
-    "Longitude": 0,
-    "Latitude": 0,
-    "LastLocTime": "2023-09-29T22:09:47.5883934+02:00"
+    "Longitude": 3.614266,
+    "Latitude": 51.0669,
+    "LastLocTime": "2023-10-01T16:57:28.076907+02:00"
   }
 ]

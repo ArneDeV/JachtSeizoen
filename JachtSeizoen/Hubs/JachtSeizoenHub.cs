@@ -36,11 +36,12 @@ namespace JachtSeizoen.Hubs
             await Clients.Caller.SendAsync("FirstStart", startTimes);
         }
 
-        public async Task RetrieveLocation(string playername, double lat, double lon)
+        public async Task RetrieveLocation(string playername, double[] coords)
         {
-            Console.WriteLine($"{playername}: Lat={lat}, Lon={lon}");
-            jsonFileService.ChangeLoc(playername, lat, lon);
-            await Clients.All.SendAsync("LocationUpdate", GameSettings!.TimeBetween * 60);
+            Console.WriteLine($"{playername}: Lat={coords[0]}, Lon={coords[1]}");
+            jsonFileService.ChangeLoc(playername, coords[1], coords[0]);
+            string playerInfo = jsonFileService.GetPlayersString();
+            await Clients.All.SendAsync("LocationUpdate", GameSettings!.TimeBetween * 60, playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount);
         }
 
         private string GetRevealTime(string playerName)

@@ -27,6 +27,12 @@ namespace JachtSeizoen.Services
                 });
         }
 
+        public string GetPlayersString()
+        {
+            using var jsonFileReader = File.OpenText(JsonPlayers);
+            return jsonFileReader.ReadToEnd();
+        }
+
         public Player GetPlayer(string playerName)
         {
             IEnumerable<Player>? players = GetPlayers();
@@ -55,11 +61,9 @@ namespace JachtSeizoen.Services
                 currentPlayer.Longitude = lon;
                 currentPlayer.Latitude = lat;
             }
-            Console.WriteLine("Placeholder for changing location");
-            Console.WriteLine(players!.First(x => x.Name == playerName).ToString());
             // First player list
-            //File.Create(JsonSettings).Close();
-            // Add the new settings
+            File.Create(JsonPlayers).Close();
+            // Add the new playerInfo
             using var outputStream = File.OpenWrite(JsonPlayers);
             JsonSerializer.Serialize<IEnumerable<Player>>(
                 new Utf8JsonWriter(outputStream, new JsonWriterOptions
@@ -86,7 +90,6 @@ namespace JachtSeizoen.Services
                 }),
                 newSettings!
             );
-
             // Start the player timers
             StartTimers();
         }
@@ -98,6 +101,8 @@ namespace JachtSeizoen.Services
             {
                 player.LastLocTime = DateTime.Now;
             }
+            // First remove player list
+            File.Create(JsonPlayers).Close();
             using var outputStream = File.OpenWrite(JsonPlayers);
             JsonSerializer.Serialize<IEnumerable<Player>>(
                 new Utf8JsonWriter(outputStream, new JsonWriterOptions
