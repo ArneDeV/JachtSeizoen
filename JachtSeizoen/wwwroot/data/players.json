@@ -3,30 +3,30 @@
     "Name": "jager1",
     "Longitude": 3.652047118922085,
     "Latitude": 51.05532518804921,
-    "LastLocTime": "2023-10-01T16:57:28.0769048+02:00"
+    "NextLocTime": "2023-10-09T22:09:23.244866+02:00"
   },
   {
     "Name": "jager2",
     "Longitude": 3.630376,
     "Latitude": 51.06678,
-    "LastLocTime": "2023-10-01T16:57:28.0769063+02:00"
+    "NextLocTime": "2023-10-09T21:49:19.6046787+02:00"
   },
   {
     "Name": "jager3",
-    "Longitude": 3.642407,
-    "Latitude": 51.065819,
-    "LastLocTime": "2023-10-01T16:57:28.0769065+02:00"
+    "Longitude": 3.630376,
+    "Latitude": 51.06678,
+    "NextLocTime": "2023-10-09T21:49:19.60468+02:00"
   },
   {
     "Name": "runner1",
-    "Longitude": 3.652048192827041,
-    "Latitude": 51.05532426662019,
-    "LastLocTime": "2023-10-01T16:58:29.3291139+02:00"
+    "Longitude": 3.652047118922085,
+    "Latitude": 51.05532518804921,
+    "NextLocTime": "2023-10-09T22:09:23.2835904+02:00"
   },
   {
     "Name": "runner2",
-    "Longitude": 3.614266,
-    "Latitude": 51.0669,
-    "LastLocTime": "2023-10-01T16:57:28.076907+02:00"
+    "Longitude": 3.630376,
+    "Latitude": 51.06678,
+    "NextLocTime": "2023-10-09T21:49:19.6046828+02:00"
   }
 ]

@@ -1,6 +1,7 @@
 ﻿using JachtSeizoen.Models;
 using JachtSeizoen.Services;
 using Microsoft.AspNetCore.SignalR;
+using System.Data;
 using System.Reflection;
 using System.Timers;
 
@@ -33,6 +34,7 @@ namespace JachtSeizoen.Hubs
         {
             string remainingPlayerTime = GetRevealTime(playerName);
             string[] startTimes = { GameTimeString, remainingPlayerTime };
+            Console.WriteLine(remainingPlayerTime);
             await Clients.Caller.SendAsync("FirstStart", startTimes);
         }
 
@@ -41,15 +43,33 @@ namespace JachtSeizoen.Hubs
             Console.WriteLine($"{playername}: Lat={coords[0]}, Lon={coords[1]}");
             jsonFileService.ChangeLoc(playername, coords[1], coords[0]);
             string playerInfo = jsonFileService.GetPlayersString();
-            await Clients.All.SendAsync("LocationUpdate", GameSettings!.TimeBetween * 60, playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount);
+            string remainingPlayerTime = GetRevealTime(playername);
+            string[] timeComponents = remainingPlayerTime.Split(":");
+            int playerTime = int.Parse(timeComponents[0]) * 60 + int.Parse(timeComponents[1]);
+            Console.WriteLine(playerTime);
+            await Clients.All.SendAsync("LocationUpdate", playerTime, playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount, playername);
         }
 
         private string GetRevealTime(string playerName)
         {
             // TODO: Change logic for Next Player time
             Player player = this.jsonFileService.GetPlayer(playerName);
-            DateTime endTime = player.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
-            TimeSpan remainingPlayerTime = endTime.Subtract(value: DateTime.Now);
+            //DateTime endTime = player.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
+            DateTime nextShow = player.NextLocTime;
+
+
+            Console.WriteLine(nextShow.ToString());
+
+
+            TimeSpan remainingPlayerTime = nextShow.Subtract(value: DateTime.Now);
+            Console.WriteLine(remainingPlayerTime.ToString(@"mm\:ss"));
+            return remainingPlayerTime.ToString(@"mm\:ss");
+        }
+
+        private static string RemaingPlayerTime(Player player)
+        {
+            DateTime nextShow = player.NextLocTime;
+            TimeSpan remainingPlayerTime = nextShow.Subtract(value: DateTime.Now);
             return remainingPlayerTime.ToString(@"mm\:ss");
         }
     }

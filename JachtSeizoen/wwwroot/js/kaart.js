@@ -1,4 +1,4 @@
-﻿// Vars used in document
+// Vars used in document
 var playerTimeM = 0;
 var playerTimeSec = 0;
 
@@ -30,9 +30,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-var runnerMarker = L.marker([51.0669, 3.614266], { icon: greenIcon }).addTo(map);
-runnerMarker.bindPopup("<b>Loper</b>");
-
 var markers = L.markerClusterGroup();
 
 function displayTime(timeInSec, id) {
@@ -41,6 +38,7 @@ function displayTime(timeInSec, id) {
     let seconds = Math.floor((timeInSec % 60));
     let formattedTime = id === "gameTime" ? padZero(hours) + ":" : ""
     formattedTime += padZero(minutes) + ":" + padZero(seconds);
+    //console.log(formattedTime);
     document.getElementById(id).textContent = formattedTime;
 }
 
@@ -50,7 +48,10 @@ function padZero(num) {
 
 function countdown() {
     gameTimeSec--;
-    playerTimeSec--;
+    // Pure visual, no actual function
+    if (playerTimeSec > 0) {
+        playerTimeSec--;
+    }
     displayTime(gameTimeSec, "gameTime");
     displayTime(playerTimeSec, "playerTime");
     if (playerTimeSec === 0) {
@@ -71,14 +72,24 @@ function updateMarkers(playerInfo, hunterAmount, runnerAmount) {
     playerInfo = JSON.parse(playerInfo);
     
     markers.clearLayers();
+    let avg_lat = 0;
+    let avg_lon = 0;
 
     for (let i = 0; i < hunterAmount; i++) {
         let coords = [playerInfo[i].Latitude, playerInfo[i].Longitude]
+        avg_lat += playerInfo[i].Latitude;
+        avg_lon += playerInfo[i].Longitude;
         createMarker([playerInfo[i].Latitude, playerInfo[i].Longitude], playerInfo[i], "hunter");
     }
     for (let i = 0; i < runnerAmount; i++) {
         createMarker([playerInfo[i+hunterAmount].Latitude, playerInfo[i+hunterAmount].Longitude], playerInfo[i+hunterAmount], "runner");
+        avg_lat += playerInfo[i].Latitude;
+        avg_lon += playerInfo[i].Longitude;
     }
+
+    let playerAmount = hunterAmount + runnerAmount;
+    map.setView([avg_lat/playerAmount, avg_lon/playerAmount], 14);
+
     map.addLayer(markers)
 }
 
@@ -119,14 +130,14 @@ connection.on("FirstStart", function (timeData) {
     setInterval(countdown, 1000);
 });
 
-connection.on("LocationUpdate", function (timeBetween, playerInfo, hunterAmount, runnerAmount) {
-    playerTimeSec = timeBetween;
-    displayTime(playerTimeSec, "playerTime");
-    // TODO: Receive all player coordinates and display them
+connection.on("LocationUpdate", function (playerTimeUpdate, playerInfo, hunterAmount, runnerAmount, updateFrom) {
+    // Playertime should come from server side instead of time between !!!
+    if (updateFrom === playerName) {
+        playerTimeSec = playerTimeUpdate
+    }
+    displayTime(playerTimeUpdate, "playerTime");
     updateMarkers(playerInfo, hunterAmount, runnerAmount);
 })
 
 // TODO:
-// 1. Fix counters DONE
-// 2. Player counter = 0 --> Send loc + get new time data DONE
-// 3. Update map
+// 1. Center map around markers

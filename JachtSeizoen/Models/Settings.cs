@@ -15,10 +15,10 @@ namespace JachtSeizoen.Models
 
         // Time that the game runs
         [Required, Range(1, int.MaxValue)]
-        public int GameTime { get; set; }
+        public double GameTime { get; set; }
 
-        [Required, Range(1, int.MaxValue)]
-        public int TimeBetween { get; set; }
+        [Required]
+        public double TimeBetween { get; set; }
 
         [DataType(DataType.DateTime)]
         public DateTime StartTime { get; set; }

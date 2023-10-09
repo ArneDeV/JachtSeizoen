@@ -51,7 +51,8 @@ namespace JachtSeizoen.Pages
             {
                 CurrentPlayer = GameDataService.GetPlayer(Handler);
                 // Change logic for NextLocTime instead
-                DateTime showTime = CurrentPlayer.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
+                //DateTime showTime = CurrentPlayer.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
+                DateTime showTime = CurrentPlayer.NextLocTime;
                 NextShown = showTime.Subtract(value: DateTime.Now);
                 Console.WriteLine($"Werkt! ({Handler})");
             }

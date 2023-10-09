@@ -54,10 +54,12 @@ namespace JachtSeizoen.Services
         {
             // Get players
             IEnumerable<Player>? players = GetPlayers();
+            Settings settings = GetSettings()!;
+            DateTime current = DateTime.Now;
             Player currentPlayer = players!.First(x => x.Name == playerName);
             if (currentPlayer != null) 
-            {
-                currentPlayer.LastLocTime = DateTime.Now;
+            {   
+                currentPlayer.NextLocTime = current.AddSeconds(settings.TimeBetween * 60);
                 currentPlayer.Longitude = lon;
                 currentPlayer.Latitude = lat;
             }
@@ -73,6 +75,7 @@ namespace JachtSeizoen.Services
                 }),
                 players!
             );
+            outputStream.Close();
         }
 
         // Write new settings to the settings file
@@ -90,6 +93,7 @@ namespace JachtSeizoen.Services
                 }),
                 newSettings!
             );
+            outputStream.Close();
             // Start the player timers
             StartTimers();
         }
@@ -97,9 +101,13 @@ namespace JachtSeizoen.Services
         public void StartTimers()
         {
             IEnumerable<Player>? players = GetPlayers();
+            Settings settings = GetSettings()!;
             foreach(Player player in players!)
             {
-                player.LastLocTime = DateTime.Now;
+                //player.LastLocTime = DateTime.Now;
+                player.NextLocTime = DateTime.Now.AddSeconds(settings.TimeBetween*60);
+                player.Latitude = 51.06678;
+                player.Longitude = 3.630376;
             }
             // First remove player list
             File.Create(JsonPlayers).Close();
@@ -112,6 +120,7 @@ namespace JachtSeizoen.Services
                 }),
                 players
             );
+            outputStream.Close();
         }
     }
 }
