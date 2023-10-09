@@ -34,7 +34,6 @@ namespace JachtSeizoen.Hubs
         {
             string remainingPlayerTime = GetRevealTime(playerName);
             string[] startTimes = { GameTimeString, remainingPlayerTime };
-            Console.WriteLine(remainingPlayerTime);
             await Clients.Caller.SendAsync("FirstStart", startTimes);
         }
 
@@ -46,20 +45,13 @@ namespace JachtSeizoen.Hubs
             string remainingPlayerTime = GetRevealTime(playername);
             string[] timeComponents = remainingPlayerTime.Split(":");
             int playerTime = int.Parse(timeComponents[0]) * 60 + int.Parse(timeComponents[1]);
-            Console.WriteLine(playerTime);
             await Clients.All.SendAsync("LocationUpdate", playerTime, playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount, playername);
         }
 
         private string GetRevealTime(string playerName)
         {
-            // TODO: Change logic for Next Player time
             Player player = this.jsonFileService.GetPlayer(playerName);
-            //DateTime endTime = player.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
             DateTime nextShow = player.NextLocTime;
-
-
-            Console.WriteLine(nextShow.ToString());
-
 
             TimeSpan remainingPlayerTime = nextShow.Subtract(value: DateTime.Now);
             Console.WriteLine(remainingPlayerTime.ToString(@"mm\:ss"));

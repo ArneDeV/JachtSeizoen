@@ -21,9 +21,6 @@ namespace JachtSeizoen.Pages
 
         private JsonFileService GameDataService { get; }
 
-        // Get EndTimes --> might not be needed
-        //private DateTime EndTime { get; }
-
         public Settings? GameSettings { get; }
 
         public Player? CurrentPlayer { get; set; }      
@@ -50,8 +47,6 @@ namespace JachtSeizoen.Pages
             if (!string.IsNullOrEmpty(Handler))
             {
                 CurrentPlayer = GameDataService.GetPlayer(Handler);
-                // Change logic for NextLocTime instead
-                //DateTime showTime = CurrentPlayer.LastLocTime.AddMinutes(GameSettings!.TimeBetween);
                 DateTime showTime = CurrentPlayer.NextLocTime;
                 NextShown = showTime.Subtract(value: DateTime.Now);
                 Console.WriteLine($"Werkt! ({Handler})");

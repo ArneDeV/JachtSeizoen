@@ -35,8 +35,6 @@ namespace JachtSeizoen.Pages
             {
                 return Page();
             }
-            // Temp location placeholder
-            //GameDataService.ChangeLoc(SelectedBox!, 50, 50);
             return RedirectToPage("Player",  SelectedBox!);
         }
     }
