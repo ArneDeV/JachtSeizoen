@@ -138,6 +138,3 @@ connection.on("LocationUpdate", function (playerTimeUpdate, playerInfo, hunterAm
     displayTime(playerTimeUpdate, "playerTime");
     updateMarkers(playerInfo, hunterAmount, runnerAmount);
 })
-
-// TODO:
-// 1. Center map around markers
