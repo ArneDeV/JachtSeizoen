@@ -44,3 +44,7 @@ body {
 #player {
     font-weight: bold;
 }
+
+#force {
+    margin-left: 10px;
+}

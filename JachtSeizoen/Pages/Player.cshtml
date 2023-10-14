@@ -9,7 +9,9 @@
     <div>
         <p class="timer">Tijd tot delen locatie:  <b id="playerTime">@Model.ShownString</b></p>
         <p class="timer">Speeltijd:  <b id="gameTime">@Model.GameTimeString</b></p>
-        <p id="playerInfo">Spelernaam: <span id="player">@Model.CurrentPlayer!.Name</span></p>
+        <p id="playerInfo">
+            Spelernaam: <span id="player">@Model.CurrentPlayer!.Name</span><button type="button" id="force" class="btn btn-warning">Force Map Update</button>
+        </p>
     </div>
 </div>
 <script src="~/js/signalr/dist/browser/signalr.js" asp-append-version="true"></script>

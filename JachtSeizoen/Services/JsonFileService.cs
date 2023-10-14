@@ -63,6 +63,7 @@ namespace JachtSeizoen.Services
                 currentPlayer.Longitude = lon;
                 currentPlayer.Latitude = lat;
             }
+
             // First player list
             File.Create(JsonPlayers).Close();
             // Add the new playerInfo
@@ -102,12 +103,14 @@ namespace JachtSeizoen.Services
         {
             IEnumerable<Player>? players = GetPlayers();
             Settings settings = GetSettings()!;
+            int counter = 0;
             foreach(Player player in players!)
             {
                 //player.LastLocTime = DateTime.Now;
-                player.NextLocTime = DateTime.Now.AddSeconds(settings.TimeBetween*60);
+                player.NextLocTime = DateTime.Now.AddSeconds(settings.TimeBetween*60 + counter*1);
                 player.Latitude = 51.06678;
                 player.Longitude = 3.630376;
+                counter++;
             }
             // First remove player list
             File.Create(JsonPlayers).Close();

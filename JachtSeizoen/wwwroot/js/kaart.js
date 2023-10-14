@@ -32,6 +32,9 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 var markers = L.markerClusterGroup();
 
+// Set event listener for forcing map update
+document.getElementById("force").addEventListener("click", forceLoc);
+
 function displayTime(timeInSec, id) {
     let hours = Math.floor(timeInSec / 3600);
     let minutes = Math.floor((timeInSec / 60) % 60);
@@ -63,9 +66,13 @@ function updateLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             let location = [position.coords.latitude, position.coords.longitude]
-            connection.invoke("RetrieveLocation", playerName, location);
+            connection.invoke("RetrieveUpdatedLocation", playerName, location);
         });
     }
+}
+
+function forceLoc() {
+    connection.invoke("RetrieveLocation");
 }
 
 function updateMarkers(playerInfo, hunterAmount, runnerAmount) {
@@ -137,4 +144,8 @@ connection.on("LocationUpdate", function (playerTimeUpdate, playerInfo, hunterAm
     }
     displayTime(playerTimeUpdate, "playerTime");
     updateMarkers(playerInfo, hunterAmount, runnerAmount);
-})
+});
+
+connection.on("LocationForce", function(playerInfo, hunterAmount, runnerAmount) {
+    updateMarkers(playerInfo, hunterAmount, runnerAmount);
+});

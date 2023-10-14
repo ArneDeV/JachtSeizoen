@@ -37,7 +37,7 @@ namespace JachtSeizoen.Hubs
             await Clients.Caller.SendAsync("FirstStart", startTimes);
         }
 
-        public async Task RetrieveLocation(string playername, double[] coords)
+        public async Task RetrieveUpdatedLocation(string playername, double[] coords)
         {
             Console.WriteLine($"{playername}: Lat={coords[0]}, Lon={coords[1]}");
             jsonFileService.ChangeLoc(playername, coords[1], coords[0]);
@@ -46,6 +46,14 @@ namespace JachtSeizoen.Hubs
             string[] timeComponents = remainingPlayerTime.Split(":");
             int playerTime = int.Parse(timeComponents[0]) * 60 + int.Parse(timeComponents[1]);
             await Clients.All.SendAsync("LocationUpdate", playerTime, playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount, playername);
+        }
+
+        // sending location without update
+        public async Task RetrieveLocation()
+        {
+            Console.WriteLine("Forced location");
+            string playerInfo = jsonFileService.GetPlayersString();
+            await Clients.Caller.SendAsync("LocationForce", playerInfo, GameSettings!.HunterAmount, GameSettings!.RunnerAmount);
         }
 
         private string GetRevealTime(string playerName)
